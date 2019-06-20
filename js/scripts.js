@@ -1,20 +1,16 @@
 $(document).ready(function(){
-  $("#grocery form").submit(function() {
+  $("#grocery form").submit(function(event) {
     event.preventDefault();
-  var groceryLists = ["carrots", "lettuce", "pasta", "broccoli", "beef"];
-  groceryLists = groceryLists.map(function(x){ return x.toUpperCase() })
+    var groceryLists = ["carrots", "lettuce", "pasta", "broccoli", "beef"];
+    var input = $("input#vegetables").val();
+    groceryLists.push(input);
+    groceryLists = groceryLists.map(function(x){ return x.toUpperCase() }).sort();
 
-  groceryLists.forEach(function(groceryList){
-    var list = $("input#" + groceryList).val();
-
-      $("ul").append("<li>" + groceryList + "<li>");
-      groceryLists.sort();
-
+    groceryLists.forEach(function(item){
+      $("ul").append("<li>" + item + "</li>");
     });
 
     $("#list").show();
     $(this).remove();
-
   });
-
-  });
+});
